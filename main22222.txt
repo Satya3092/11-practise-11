@@ -1,0 +1,24 @@
+Resolution
+Try the following steps to resolve your error:
+
+
+If you don't have permissions to do the following changes, contact your AWS Administrator
+
+Navigate to the IAM console at https://console.aws.amazon.com/iam/
+Locate the root user or the IAM entity currently being used to access the console for account 546478858943
+Review the attached IAM policies to identify which policy needs to be updated or create a new policy
+Create or update an IAM policy with the following permissions:
+Effect: Allow
+Action: ec2:DisassociateAddress
+Resource: arn:aws:ec2:us-east-1:546478858943:elastic-ip/eipalloc-037b9ee176e2209bc
+Additionally, add the following permission to describe the Elastic IP:
+Effect: Allow
+Action: ec2:DescribeAddresses
+Resource: *
+If the Elastic IP is associated with a network interface, also add:
+Effect: Allow
+Action: ec2:DescribeNetworkInterfaces
+Resource: *
+Attach the policy to the root user or IAM entity being used
+Wait a few moments for the policy changes to propagate
+Return to the EC2 console and retry disassociating the Elastic IP address 52.202.43.179
